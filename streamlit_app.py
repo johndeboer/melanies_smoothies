@@ -25,6 +25,7 @@ if ingredients_list and customer_name:
     ingredients_string = ''
     for fruit in ingredients_list:
         ingredients_string += fruit + ' '
+        st.subheader(fruit + ' Nutrition Information')
         fruityvice_response = requests.get("https://fruityvice.com/api/fruit/" + fruit)
         fv_df = st.dataframe(data=fruityvice_response.json(), use_container_width=True)
         
@@ -39,6 +40,3 @@ if ingredients_list and customer_name:
         session.sql(my_insert_stmt).collect()
         st.success('Your Smoothie is ordered, '+ customer_name +'!', icon="✅")
         
-
-fruityvice_response = requests.get("https://fruityvice.com/api/fruit/watermelon")
-fv_df = st.dataframe(data=fruityvice_response.json(), use_container_width=True)
